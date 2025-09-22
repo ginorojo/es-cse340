@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const inventoryRoute = require("./routes/inventoryRoute")
 const express = require("express")
 const baseController = require("./controllers/baseController")
 const expressLayouts = require("express-ejs-layouts")
@@ -24,6 +25,7 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************/
 app.use(static)
+app.use("/inv", inventoryRoute)
 
 //index route
 app.get("/", baseController.buildHome)
