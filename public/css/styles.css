@@ -43,6 +43,7 @@ nav a{
 
 #hero-section{
   position: relative;
+  width:max-content;
 }
 
 #img-container{
@@ -141,15 +142,7 @@ nav a{
   flex-direction: column;
 }
 
-#inv-display{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
-  gap: 20px;
-  text-decoration: none;
 
-}
 #inv-display li {
   border: 1px solid black;
   list-style: none;
@@ -158,6 +151,7 @@ nav a{
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  margin-bottom: 20px;
 
 }
 #inv-display a {
@@ -175,6 +169,10 @@ nav a{
   align-items: center;
 }
 
+#inv-display{
+  padding: 10px;
+}
+
 #inv-display img {
   width: 100%;
   height: 140px;
@@ -187,13 +185,45 @@ nav a{
   text-align: center;
 }
 
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.vehicle-image img{
+  width: 100%;
+
+}
+
+.vehicle-detail{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+
+}
+
+.title-img{
+  display: flex;
+  flex-direction: column ;
+}
+
 
 @media(min-width: 768px){
+  #img-container img {
+  width: 100%;
+  height: auto;
+}
+
   #container-section{
     display: flex;
     flex-direction:row-reverse;
     justify-content: space-between;
     padding-top: 50px;
+    gap: 50px;
 
   }
 
@@ -265,13 +295,44 @@ body {
 
 
 #wrapper {
-  width: 80%;
+  width: 90%;
   border: 6px solid #01b0d3;
   background: #fff;
   margin:0 auto;
   padding: 20px;
   border-radius: 10px;
+  min-height:650px;
+}
+
+#inv-display{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+
+}
+.vehicle-detail{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  width: 100%;
+  
+}
+
+.vehicle-info{
+  width: 50%;
+
+}
+
+.vehicle-image img{
+  width: 100%;
 }
 
 
+
+
+
 }
+

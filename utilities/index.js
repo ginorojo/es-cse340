@@ -60,3 +60,42 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+/* ***************************************
+ * biuld html for vehicle detail
+ **************************************** */
+Util.buildInventoryDetail = function(vehicle) {
+  if (!vehicle) return "<p class='notice'>Vehicle data not found.</p>";
+
+  // Formateo de precio y kilometraje
+  const priceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(vehicle.inv_price);
+  const milesFormatted = vehicle.inv_miles.toLocaleString();
+
+  // Construcción HTML
+  let detailHTML = `
+    <div class="vehicle-detail">
+      <div class="title-img">
+        <h1>${vehicle.inv_make} ${vehicle.inv_model}</h1>
+      <div class="vehicle-image">
+        <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
+      </div>
+      </div>
+      <div class="vehicle-info">
+        <p><strong>Year:</strong> ${vehicle.inv_year}</p>
+        <p><strong>Price:</strong> ${priceFormatted}</p>
+        <p><strong>Mileage:</strong> ${milesFormatted} miles</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+      </div>
+    </div>
+  `;
+
+  return detailHTML;
+};
+
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
