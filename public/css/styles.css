@@ -5,6 +5,10 @@
   box-sizing: border-box;
 
 }
+/* General page styles */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
 
 .siteName a{
@@ -211,6 +215,104 @@ main{
   flex-direction: column ;
 }
 
+
+/* Form container */
+.register-form,
+.login-form {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+/* Labels and inputs */
+form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 4px rgba(52,152,219,0.3);
+}
+
+/* Buttons */
+form button {
+  width: 100%;
+  padding: 12px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+form button:hover {
+  background: #2980b9;
+}
+
+/* Flash messages */
+.flash-message {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.flash-message p {
+  margin: 0;
+}
+
+/* Password requirements note */
+form div {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: -12px;
+  margin-bottom: 16px;
+}
+
+/* Links under forms */
+form + p {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.9rem;
+}
+
+form + p a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+form + p a:hover {
+  text-decoration: underline;
+}
+
+.notice{
+  color: red;
+}
 
 @media(min-width: 768px){
   #img-container img {
