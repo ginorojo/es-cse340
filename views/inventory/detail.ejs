@@ -1,1 +1,16 @@
-<%- detailHTML %>
+<!-- 
+The content heading
+-->
+<% if (title) { %>
+<h1 class="detail-title"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!-- 
+Message Block
+-->
+<%# messages() %>
+
+<!-- 
+Inventory items displayed on a grid
+-->
+<%- detailView %>

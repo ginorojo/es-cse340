@@ -3,28 +3,25 @@
 *:before,
 *:after {
   box-sizing: border-box;
-
 }
 /* General page styles */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-.siteName a{
+.siteName a {
   color: black;
   text-decoration: none;
   font-size: 35px;
   font-weight: bold;
-
 }
 
-#tools a{
+#tools a {
   text-decoration: none;
   color: black;
 }
 
-#top-header{
+#top-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -36,21 +33,20 @@ nav ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding:12px ;
-
+  padding: 12px;
 }
 
-nav a{
-   color: white;
-   text-decoration: none;
+nav a {
+  color: white;
+  text-decoration: none;
 }
 
-#hero-section{
+#hero-section {
   position: relative;
-  width:max-content;
+  width: max-content;
 }
 
-#img-container{
+#img-container {
   display: flex;
   justify-content: center;
 }
@@ -59,66 +55,62 @@ nav a{
   height: auto;
 }
 
-#title-hero{
+#title-hero {
   font-size: 18px;
   font-weight: bold;
 }
 
-#banner{
+#banner {
   position: absolute;
   padding: 2px;
   width: 105px;
   height: 100px;
   background-color: rgba(255, 255, 255, 0.758);
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   font-size: 13px;
   gap: 2px;
   color: #01b0d3;
   font-weight: 600;
 }
 
-#banner h4{
+#banner h4 {
   padding: 0;
-  margin:0 ;
+  margin: 0;
   font-weight: bolder;
   font-size: 15px;
-
 }
 
-#banner button{
+#banner button {
   background-color: #01b0d3;
-  font-weight:bold;
+  font-weight: bold;
   border: none;
 }
 
-#reviews-section{
+#reviews-section {
   font-size: 15px;
 }
 
-#reviews-section ul{
+#reviews-section ul {
   padding-left: 17px;
   margin: 0;
-
 }
 
-.upgrades{
+.upgrades {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-bottom: 20px;
-  
 }
 
-.upgrades p{
+.upgrades p {
   margin: 0;
   color: blue;
   text-decoration: underline;
-
 }
 
-.img-upgrade-cont{
+.img-upgrade-cont {
   background-color: #01b0d3;
   width: 150px;
   height: 70px;
@@ -126,26 +118,23 @@ nav a{
   justify-content: center;
   align-items: center;
   border: 2px solid black;
-
 }
 
-.img-upgrade-cont img{
+.img-upgrade-cont img {
   width: 50px;
 }
 
-
-#upgrades-section{
+#upgrades-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2px;
   place-items: center;
 }
 
-#container-section{
+#container-section {
   display: flex;
   flex-direction: column;
 }
-
 
 #inv-display li {
   border: 1px solid black;
@@ -156,7 +145,6 @@ nav a{
   align-items: center;
   border-radius: 10px;
   margin-bottom: 20px;
-
 }
 #inv-display a {
   display: flex;
@@ -164,57 +152,53 @@ nav a{
   text-decoration: none;
 }
 
-.namePrice{
+.namePrice {
   width: 200px;
-  height:170px;
+  height: 170px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#inv-display{
+#inv-display {
   padding: 10px;
 }
 
 #inv-display img {
   width: 100%;
   height: 140px;
-  border-top-left-radius:10px ;
-  border-top-right-radius:10px ;
-
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
-#inv-display a{
+#inv-display a {
   color: black;
   text-align: center;
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.vehicle-image img{
+.vehicle-image img {
   width: 100%;
-
 }
 
-.vehicle-detail{
+.vehicle-detail {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 10px;
-
 }
 
-.title-img{
+.title-img {
   display: flex;
-  flex-direction: column ;
+  flex-direction: column;
 }
-
 
 /* Form container */
 .register-form,
@@ -222,7 +206,7 @@ main{
   background: #fff;
   padding: 30px 40px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
 }
@@ -255,7 +239,7 @@ form input {
 form input:focus {
   outline: none;
   border-color: #3498db;
-  box-shadow: 0 0 4px rgba(52,152,219,0.3);
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.3);
 }
 
 /* Buttons */
@@ -310,131 +294,144 @@ form + p a:hover {
   text-decoration: underline;
 }
 
-.notice{
+.notice {
   color: red;
 }
 
-@media(min-width: 768px){
-  #img-container img {
-  width: 100%;
-  height: auto;
+.management-links ul {
+  display: flex;
+  flex-direction: column;
+}
+.management a:hover {
+  color: #01b0d3;
 }
 
-  #container-section{
+.add-inventory-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.add-inventory-form textarea {
+  border-radius: 8px;
+  border-color: #55555548;
+}
+.add-inventory-form :required:valid {
+  border: 2px solid green;
+  background-color: #e5ffe5;
+}
+.add-inventory-form :required:invalid {
+  border: 2px solid red;
+
+}
+
+@media (min-width: 768px) {
+  #img-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  #container-section {
     display: flex;
-    flex-direction:row-reverse;
+    flex-direction: row-reverse;
     justify-content: space-between;
     padding-top: 50px;
     gap: 50px;
-
   }
 
-  .img-upgrade-cont{
-  width: 200px;
-  height: 100px;
+  .img-upgrade-cont {
+    width: 200px;
+    height: 100px;
+  }
 
+  .img-upgrade-cont img {
+    width: 80px;
+  }
+
+  #reviews-section {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  #banner {
+    position: absolute;
+    padding: 2px;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.758);
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+    gap: 4px;
+    color: #01b0d3;
+    font-weight: 600;
+  }
+
+  #banner h4 {
+    padding: 0;
+    margin: 0;
+    font-weight: bolder;
+    font-size: 30px;
+  }
+
+  #banner button {
+    background-color: #01b0d3;
+    font-weight: bold;
+    border: none;
+  }
+  #banner button {
+    width: 180px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  #title-hero {
+    font-size: 40px;
+    padding-bottom: 40px;
+  }
+
+  body {
+    margin: 0;
+    padding: 10px;
+    background-image: url("/images/site/small_check.png");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  #wrapper {
+    width: 90%;
+    border: 6px solid #01b0d3;
+    background: #fff;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 650px;
+  }
+
+  #inv-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+  }
+  .vehicle-detail {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    width: 100%;
+  }
+
+  .vehicle-info {
+    width: 50%;
+  }
+
+  .vehicle-image img {
+    width: 100%;
+  }
 }
-
-.img-upgrade-cont img{
-  width: 80px;
-}
-
-#reviews-section{
-  font-size: 20px;
-}
-
-h3{
-  font-size: 30px;
-  
-}
-
-#banner{
-  position: absolute;
-  padding: 2px;
-  width: 200px;
-  height: 200px;
-  background-color: rgba(255, 255, 255, 0.758);
-  display: flex;
-  flex-direction:column;
-  font-size: 25px;
-  gap: 4px;
-  color: #01b0d3;
-  font-weight: 600;
-}
-
-#banner h4{
-  padding: 0;
-  margin:0 ;
-  font-weight: bolder;
-  font-size: 30px;
-
-}
-
-#banner button{
-  background-color: #01b0d3;
-  font-weight:bold;
-  border: none;
-}
-#banner button{
-  width: 180px;
-  height: 50px;
-  font-size: 20px;
-}
-
-#title-hero{
-  font-size: 40px;
-  padding-bottom: 40px;
-}
-
-body {
-  margin: 0;
-  padding: 10px;
-  background-image: url("/images/site/small_check.png");
-  background-size: cover;   
-  background-position: center;
-  position: relative;
-}
-
-
-#wrapper {
-  width: 90%;
-  border: 6px solid #01b0d3;
-  background: #fff;
-  margin:0 auto;
-  padding: 20px;
-  border-radius: 10px;
-  min-height:650px;
-}
-
-#inv-display{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  text-decoration: none;
-
-}
-.vehicle-detail{
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  width: 100%;
-  
-}
-
-.vehicle-info{
-  width: 50%;
-
-}
-
-.vehicle-image img{
-  width: 100%;
-}
-
-
-
-
-
-}
-

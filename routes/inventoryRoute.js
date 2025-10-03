@@ -1,14 +1,51 @@
-// Needed Resources 
-const express = require("express")
-const router = new express.Router() 
-const invController = require("../controllers/invController")
-const utilities = require("../utilities");
-const accountController = require("../controllers/accountController")
-// Route to build inventory by classification view
-router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
-router.get("/detail/:invId", utilities.handleErrors(invController.buildByInventoryId));
-router.get("/test/error500", (req, res, next) => {
-    next(new Error("this is an intentional 500 error !"))
-})
+// Resources
+const express = require('express');
+const router = new express.Router();
+const invController = require('../controllers/invController');
+const utilities = require('../utilities');
+const invValidate = require('../utilities/inventory-validation');
+
+// Route to build the inventory classification view
+router.get(
+  '/type/:classificationId',
+  utilities.handleErrors(invController.buildByClassificationId)
+);
+
+// Route to build the inventory detail view
+router.get(
+  '/detail/:inventoryId',
+  utilities.handleErrors(invController.buildByInventoryId)
+);
+
+//Management view route
+router.get('/', utilities.handleErrors(invController.buildManagement));
+
+//Add classification view
+router.get(
+  '/add-classification',
+  utilities.handleErrors(invController.buildAddClassification)
+);
+
+// Post a new classification
+router.post(
+  '/add-classification',
+  invValidate.addClassificationRules(),
+  invValidate.checkClassificationData,
+  utilities.handleErrors(invController.addClassification)
+);
+
+//Add inventory view
+router.get(
+  '/add-inventory',
+  utilities.handleErrors(invController.buildAddInventory)
+);
+
+// Post an inventory item
+router.post(
+  '/add-inventory',
+  invValidate.addInventoryRules(),
+  invValidate.checkInventoryData,
+  utilities.handleErrors(invController.addInventory)
+);
 
 module.exports = router;
