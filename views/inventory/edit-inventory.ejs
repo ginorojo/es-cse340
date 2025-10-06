@@ -9,7 +9,7 @@
 </ul>
 <% } %>
 
-<form class="add-inventory-form" action="/inv/update" method="post">
+<form id="updateForm" class="add-inventory-form" action="/inv/update" method="post">
   <label for="classification_id">Classification: </label>
   <%- classificationSelect %>
 
@@ -52,10 +52,8 @@
     name="inv_description"
     id="inv_description"
     required
-    title="Vehicle description"
-  >
-<%= locals.inv_description %></textarea
-  >
+    title="Vehicle description">
+<%= locals.inv_description %></textarea>
 
   <label for="inv_image">Image URL: </label>
   <input
@@ -119,5 +117,12 @@
   <!-- <input type="hidden" name="inv_id"
 <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
 <% } %>> -->
-  <button type="submit">update vehicle</button>
+ <button type="submit" hidden  >update vehicle</button>
+
+
+  <input type="hidden" name="inv_id" 
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %> >
+
+<script src="/js/inv-update.js" defer></script>
+
 </form>
