@@ -70,7 +70,7 @@ validate.checkInventoryData = async (req, res, next) => {
   let classificationList = await utilities.buildClassificationList(req.body.classification_id);
   if (!errors.isEmpty()) {
     const nav = await utilities.getNav();
-    return res.render('inventory/management', {
+    return res.render('inventory/add-inventory', {
       title: 'Add New Inventory Item',
       nav,
       errors,
@@ -95,14 +95,14 @@ validate.checkInventoryData = async (req, res, next) => {
  * ********************************* */
 validate.checkUpdateData = async (req, res, next) => {
   const errors = validationResult(req);
-  let classificationList = await utilities.buildClassificationList(req.body.classification_id);
+  let classificationSelect = await utilities.buildClassificationList(req.body.classification_id);
   if (!errors.isEmpty()) {
     const nav = await utilities.getNav();
     return res.render('inventory/edit-inventory', {
       title: 'Update Inventory Item',
       nav,
       errors,
-      classificationList,
+      classificationSelect,
       classification_id: req.body.classification_id,
       inv_make: req.body.inv_make,
       inv_model: req.body.inv_model,

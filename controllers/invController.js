@@ -80,6 +80,7 @@ invCont.addClassification = async (req, res, next) => {
     res.status(201).render("inventory/management", {
       title: "Inventory Management",
       nav,
+      classificationSelect,
     });
   } else {
     req.flash("notice", "Sorry, the registration failed.");
@@ -146,9 +147,11 @@ invCont.addInventory = async (req, res, next) => {
       "notice",
       `The new inventory item ${inv_make} ${inv_model} was added successfully.`
     );
+    const classificationSelect = await utilities.buildClassificationList();
     res.status(201).render("inventory/management", {
       title: "Inventory Management",
       nav,
+      classificationSelect,
     });
   } else {
     req.flash("notice", "Sorry, the registration failed.");
@@ -269,5 +272,43 @@ invCont.editInventoryView = async function (req, res, next) {
     classification_id: itemData.classification_id,
   });
 };
+
+/* ***************************
+ *  Build Delete Confirmation View
+ * ************************** */
+invCont.buildDeleteView = async (req, res, next) => {
+  const inv_id = parseInt(req.params.inv_id);
+  const nav = await utilities.getNav();
+  const data = await invModel.getByInventoryId(inv_id); // tu función que obtiene item
+  const name = `${data.inv_make} ${data.inv_model}`;
+
+  res.render('inventory/delete-confirm', {
+    title: `Delete ${name}`,
+    nav,
+    errors: null,
+    inv_make: data.inv_make,
+    inv_model: data.inv_model,
+    inv_year: data.inv_year,
+    inv_price: data.inv_price,
+    inv_id: data.inv_id
+  });
+};
+
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+invCont.deleteInventory = async (req, res, next) => {
+  const inv_id = parseInt(req.body.inv_id);
+  const deleteResult = await invModel.deleteInventoryItem(inv_id);
+
+  if (deleteResult) {
+    req.flash("notice", "Inventory item deleted successfully.");
+    res.redirect("/inv/");
+  } else {
+    req.flash("notice", "Delete failed. Please try again.");
+    res.redirect(`/inv/delete/${inv_id}`);
+  }
+};
+
 
 module.exports = invCont;
