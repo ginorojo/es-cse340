@@ -1,28 +1,37 @@
 <!-- 
  The content heading
  -->
- <% if (title) { %>
- <h1 class="management-title"><%= title %></h1>
- <% } else { res.redirect('/') } %>
- 
- <h3 class="management-subtitle">Select One Option</h3>
- 
- <!-- 
+<% if (title) { %>
+  <h1 class="management-title">
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %>
+
+    <h3 class="management-subtitle">Select One Option</h3>
+
+    <!-- 
  Message Block
  -->
- <%- messages() %>
- 
- <!-- 
+    <%- messages() %>
+
+      <!-- 
  Links to handle inventory management
  -->
- <nav class="management-links">
-   <ul class="management">
-       <li>
-             <a href="/inv/add-classification">Add New Classification</a>
-                 </li>
-                     <li>
-                           <a href="/inv/add-inventory">Add New Inventory</a>
-                               </li>
-                                 </ul>
-                                 </nav>
-                                
+      <nav class="management-links">
+        <ul class="management">
+          <li>
+            <a href="/inv/add-classification">Add New Classification</a>
+          </li>
+          <li>
+            <a href="/inv/add-inventory">Add New Inventory</a>
+          </li>
+        </ul>
+
+        <h2>Manage Inventory</h2>
+        <p>Select a classification from the list to see the items belonging to the classification.</p>
+        <%-classificationSelect %>
+          <table id="inventoryDisplay"></table>
+          <noscript>JavaScript must be enabled to use this page.</noscript>
+         <script src="../../js/inventory.js"></script>
+
+      </nav>

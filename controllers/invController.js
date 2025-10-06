@@ -1,5 +1,5 @@
-const invModel = require('../models/inventory-model');
-const utilities = require('../utilities/');
+const invModel = require("../models/inventory-model");
+const utilities = require("../utilities/");
 
 const invCont = {};
 
@@ -12,10 +12,10 @@ invCont.buildByClassificationId = async (req, res, next) => {
   const grid = await utilities.buildClassificationGrid(data);
   let nav = await utilities.getNav();
   const classname = data[0].classification_name;
-  res.render('inventory/classification', {
-    title: classname + ' vehicles',
+  res.render("inventory/classification", {
+    title: classname + " vehicles",
     nav,
-    grid
+    grid,
   });
 };
 
@@ -27,22 +27,26 @@ invCont.buildByInventoryId = async (req, res, next) => {
   const data = await invModel.getByInventoryId(inventory_id);
   const detailView = await utilities.buildDetailsView(data);
   const nav = await utilities.getNav();
-  const name = data.inv_year + ' ' + data.inv_make + ' ' + data.inv_model;
-  res.render('inventory/detail', {
+  const name = data.inv_year + " " + data.inv_make + " " + data.inv_model;
+  res.render("inventory/detail", {
     title: name,
     nav,
-    detailView
+    detailView,
   });
 };
 
 /* ***************************
  *  Build inventory management view
  * ************************** */
-invCont.buildManagement = async (req, res, next) => {
+invCont.buildManagementview = async function (req, res, next) {
   const nav = await utilities.getNav();
-  res.render('inventory/management', {
-    title: 'Inventory Management',
-    nav
+  const classificationSelect = await utilities.buildClassificationList();
+
+  res.render("./inventory/management", {
+    title: "vehicle Management",
+    nav,
+    errors: null,
+    classificationSelect,
   });
 };
 
@@ -51,10 +55,10 @@ invCont.buildManagement = async (req, res, next) => {
  * ************************** */
 invCont.buildAddClassification = async (req, res, next) => {
   const nav = await utilities.getNav();
-  res.render('inventory/add-classification', {
-    title: 'Add New Classification',
+  res.render("inventory/add-classification", {
+    title: "Add New Classification",
     nav,
-    errors: null
+    errors: null,
   });
 };
 
@@ -69,20 +73,20 @@ invCont.addClassification = async (req, res, next) => {
 
   if (regResult) {
     req.flash(
-      'notice',
+      "notice",
       `The new classification ${classification_name} was added successfully.`
     );
     const nav = await utilities.getNav();
-    res.status(201).render('inventory/management', {
-      title: 'Inventory Management',
-      nav
+    res.status(201).render("inventory/management", {
+      title: "Inventory Management",
+      nav,
     });
   } else {
-    req.flash('notice', 'Sorry, the registration failed.');
-    res.status(501).render('inventory/add-classification', {
-      title: 'Add New Classification',
+    req.flash("notice", "Sorry, the registration failed.");
+    res.status(501).render("inventory/add-classification", {
+      title: "Add New Classification",
       nav,
-      errors: null
+      errors: null,
     });
   }
 };
@@ -94,11 +98,11 @@ invCont.buildAddInventory = async (req, res, next) => {
   let nav = await utilities.getNav();
   let data = await invModel.getClassifications();
   let classificationList = await utilities.buildClassificationList(data);
-  res.render('inventory/add-inventory', {
-    title: 'Add Inventory',
+  res.render("inventory/add-inventory", {
+    title: "Add Inventory",
     nav,
     errors: null,
-    classificationList
+    classificationList,
   });
 };
 
@@ -119,7 +123,7 @@ invCont.addInventory = async (req, res, next) => {
     inv_price,
     inv_miles,
     inv_color,
-    classification_id
+    classification_id,
   } = req.body;
 
   const classificationIdNum = parseInt(classification_id, 10);
@@ -139,22 +143,67 @@ invCont.addInventory = async (req, res, next) => {
 
   if (regResult) {
     req.flash(
-      'notice',
+      "notice",
       `The new inventory item ${inv_make} ${inv_model} was added successfully.`
     );
-    res.status(201).render('inventory/management', {
-      title: 'Inventory Management',
-      nav
+    res.status(201).render("inventory/management", {
+      title: "Inventory Management",
+      nav,
     });
   } else {
-    req.flash('notice', 'Sorry, the registration failed.');
-    res.status(501).render('inventory/add-inventory', {
-      title: 'Add Inventory',
+    req.flash("notice", "Sorry, the registration failed.");
+    res.status(501).render("inventory/add-inventory", {
+      title: "Add Inventory",
       nav,
       errors: null,
-      classificationList
+      classificationList,
     });
   }
+};
+
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id);
+  const invData = await invModel.getInventoryByClassificationId(
+    classification_id
+  );
+  if (invData[0]?.inv_id) {
+    return res.json(invData);
+  } else {
+    next(new Error("No data returned"));
+  }
+};
+
+/* ***************************
+ *  Build edit inventory view
+ * ************************** */
+invCont.editInventoryView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id);
+  let nav = await utilities.getNav();
+  const itemData = await invModel.getByInventoryId(inv_id);
+  const classificationSelect = await utilities.buildClassificationList(
+    itemData.classification_id
+  );
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+    res.render("./inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+    classificationSelect: classificationSelect,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id,
+  });
 };
 
 module.exports = invCont;

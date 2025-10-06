@@ -325,6 +325,27 @@ form + p a:hover {
 
 }
 
+#inventoryDisplay td{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: black;
+  padding-right: 20px;
+}
+
+#inventoryDisplay th{
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 5px;
+  padding-bottom: 5px
+}
+#inventoryDisplay a{
+ color: #01b0d3;
+}
+
+#classification_id{
+  border: 5px solid #01b0d3;
+}
+
 @media (min-width: 768px) {
   #img-container img {
     width: 100%;

@@ -1,34 +1,35 @@
 // Resources
-const express = require('express');
+const express = require("express");
 const router = new express.Router();
-const invController = require('../controllers/invController');
-const utilities = require('../utilities');
-const invValidate = require('../utilities/inventory-validation');
+const invController = require("../controllers/invController");
+const utilities = require("../utilities");
+const invValidate = require("../utilities/inventory-validation");
+
 
 // Route to build the inventory classification view
 router.get(
-  '/type/:classificationId',
+  "/type/:classificationId",
   utilities.handleErrors(invController.buildByClassificationId)
 );
 
 // Route to build the inventory detail view
 router.get(
-  '/detail/:inventoryId',
+  "/detail/:inventoryId",
   utilities.handleErrors(invController.buildByInventoryId)
 );
 
 //Management view route
-router.get('/', utilities.handleErrors(invController.buildManagement));
+router.get("/", utilities.handleErrors(invController.buildManagementview));
 
 //Add classification view
 router.get(
-  '/add-classification',
+  "/add-classification",
   utilities.handleErrors(invController.buildAddClassification)
 );
 
 // Post a new classification
 router.post(
-  '/add-classification',
+  "/add-classification",
   invValidate.addClassificationRules(),
   invValidate.checkClassificationData,
   utilities.handleErrors(invController.addClassification)
@@ -36,16 +37,26 @@ router.post(
 
 //Add inventory view
 router.get(
-  '/add-inventory',
+  "/add-inventory",
   utilities.handleErrors(invController.buildAddInventory)
 );
 
 // Post an inventory item
 router.post(
-  '/add-inventory',
+  "/add-inventory",
   invValidate.addInventoryRules(),
   invValidate.checkInventoryData,
   utilities.handleErrors(invController.addInventory)
 );
+
+//fetch route
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+
+// Route to build edit inventory view
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+
 
 module.exports = router;
