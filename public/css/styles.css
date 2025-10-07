@@ -343,8 +343,42 @@ form + p a:hover {
 }
 
 #classification_id{
-  border: 5px solid #01b0d3;
+  border: 5px solid #3498db;
 }
+
+
+
+#tools{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start
+}
+
+#tools a{
+  color: #3498db;
+  font-weight:500;
+}
+#tools a:hover{
+  color: #00b2d69d;
+  font-weight:500;
+}
+
+a{
+ color: #3498db; 
+}
+
+
+#tools span{
+  color: black;
+  font-weight: 600;
+}
+
+.button-submit{
+ background-color: #3498db;
+ color: white;
+}
+
 
 @media (min-width: 768px) {
   #img-container img {
@@ -455,4 +489,10 @@ form + p a:hover {
   .vehicle-image img {
     width: 100%;
   }
+  #tools{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
+}
 }

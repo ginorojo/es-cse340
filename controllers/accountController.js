@@ -137,10 +137,106 @@ async function buildAccountManagement(req, res, next) {
   });
 }
 
+async function buildAccountUpdateView(req, res, next) {
+  let nav = await utilities.getNav();
+  const accountId = req.params.accountId;
+
+  try {
+    const accountData = await accountModel.getAccountById(accountId);
+    if (!accountData) {
+      req.flash("notice", "Account not found.");
+      return res.redirect("/account/");
+    }
+
+    res.render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: null,
+      accountData
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function updateAccountInfo(req, res, next) {
+  let nav = await utilities.getNav();
+  const { account_id, account_firstname, account_lastname, account_email } = req.body;
+
+  try {
+    const existingEmail = await accountModel.checkExistingEmail(account_email);
+    if (existingEmail) {
+      req.flash("notice", "Email already in use.");
+      return res.render("account/update", {
+        title: "Update Account",
+        nav,
+        errors: null,
+        accountData: { account_id, account_firstname, account_lastname, account_email }
+      });
+    }
+
+    const updateResult = await accountModel.updateAccountInfo(
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email
+    );
+
+    req.flash("notice", updateResult ? "Account updated successfully." : "Account update failed.");
+
+    const updatedAccount = await accountModel.getAccountById(account_id);
+
+    res.render("account/account-management", {
+      title: "Account Management",
+      nav,
+      errors: null,
+      accountData: updatedAccount
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function updateAccountPassword(req, res, next) {
+  let nav = await utilities.getNav();
+  const { account_id, new_password } = req.body;
+
+  try {
+    if (!new_password || new_password.length < 12) {
+      req.flash("notice", "Password does not meet requirements.");
+      return res.render("account/update", {
+        title: "Update Account",
+        nav,
+        errors: null,
+        accountData: { account_id }
+      });
+    }
+
+    const hashedPassword = await bcrypt.hashSync(new_password, 10);
+    const result = await accountModel.updateAccountPassword(account_id, hashedPassword);
+
+    req.flash("notice", result ? "Password updated successfully." : "Password update failed.");
+
+    const updatedAccount = await accountModel.getAccountById(account_id);
+    res.render("account/account-management", {
+      title: "Account Management",
+      nav,
+      errors: null,
+      accountData: updatedAccount
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   buildLogin,
   buildRegister,
   registerAccount,
   accountLogin,
-  buildAccountManagement
+  buildAccountManagement,
+  buildAccountUpdateView,
+  updateAccountInfo,
+  updateAccountPassword
 };

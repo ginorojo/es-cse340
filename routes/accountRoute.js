@@ -37,4 +37,31 @@ router.get(
   utilities.handleErrors(accountController.buildAccountManagement)
 );
 
+// Vista para actualizar cuenta
+router.get(
+  '/update/:accountId',
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildAccountUpdateView)
+);
+
+// Procesar actualización de información
+router.post(
+  '/update-info',
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.updateAccountInfo)
+);
+
+// Procesar cambio de contraseña
+router.post(
+  '/update-password',
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.updateAccountPassword)
+);
+
+router.get('/logout', (req, res) => {
+  res.clearCookie("jwt");
+  res.redirect("/");
+});
+
+
 module.exports = router;
