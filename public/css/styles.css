@@ -34,6 +34,7 @@ nav ul {
   flex-direction: row;
   justify-content: space-around;
   padding: 12px;
+  font-size: 12px;
 }
 
 nav a {
@@ -379,6 +380,17 @@ a{
  color: white;
 }
 
+#inv-detail img{
+  width: 100%;
+  height: auto;
+}
+
+#review textarea{
+ width: 100%;
+ height: 100px;
+
+}
+
 
 @media (min-width: 768px) {
   #img-container img {
@@ -494,5 +506,8 @@ a{
   flex-direction: column;
   justify-content: center;
   align-items: center
+}
+nav ul {
+  font-size: 20px;
 }
 }

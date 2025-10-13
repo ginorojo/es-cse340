@@ -13,7 +13,7 @@
 <% } %>
 
 <% if (locals.loggedin) { %>
-<form action="/inv/add-review" method="POST">
+<form action="/inv/add-review" method="POST" id="review">
   <input type="hidden" name="inv_id" value="<%= inventoryId %>">
   <textarea name="review_text" required placeholder="Write your review"></textarea>
   <button type="submit">Submit Review</button>
