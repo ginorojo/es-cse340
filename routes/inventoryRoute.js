@@ -72,4 +72,5 @@ router.get('/delete/:inv_id', utilities.handleErrors(invController.buildDeleteVi
 // Process delete request
 router.post('/delete', utilities.handleErrors(invController.deleteInventory));
 
+router.post('/add-review', utilities.checkLogin, utilities.handleErrors(invController.addReview));
 module.exports = router;

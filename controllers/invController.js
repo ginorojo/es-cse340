@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
+const reviewModel = require('../models/review-model');
 
 const invCont = {};
 
@@ -19,21 +20,7 @@ invCont.buildByClassificationId = async (req, res, next) => {
   });
 };
 
-/* ***************************
- *  Build inventory by detail view
- * ************************** */
-invCont.buildByInventoryId = async (req, res, next) => {
-  const inventory_id = req.params.inventoryId;
-  const data = await invModel.getByInventoryId(inventory_id);
-  const detailView = await utilities.buildDetailsView(data);
-  const nav = await utilities.getNav();
-  const name = data.inv_year + " " + data.inv_make + " " + data.inv_model;
-  res.render("inventory/detail", {
-    title: name,
-    nav,
-    detailView,
-  });
-};
+
 
 /* ***************************
  *  Build inventory management view
@@ -308,6 +295,40 @@ invCont.deleteInventory = async (req, res, next) => {
     req.flash("notice", "Delete failed. Please try again.");
     res.redirect(`/inv/delete/${inv_id}`);
   }
+};
+
+// Obtener reseñas y mostrar en el detalle
+invCont.buildByInventoryId = async (req, res, next) => {
+  const inventory_id = req.params.inventoryId;
+  const data = await invModel.getByInventoryId(inventory_id);
+  const detailView = await utilities.buildDetailsView(data);
+  const nav = await utilities.getNav();
+  const name = data.inv_year + " " + data.inv_make + " " + data.inv_model;
+  
+  // Obtener reseñas
+  const reviews = await reviewModel.getReviewsByInventory(inventory_id);
+  
+  res.render("inventory/detail", {
+    title: name,
+    nav,
+    detailView,
+    reviews,
+    inventoryId: inventory_id
+  });
+};
+
+// Procesar nueva reseña
+invCont.addReview = async (req, res, next) => {
+  const { inv_id, review_text } = req.body;
+  const account_id = res.locals.accountData.account_id;
+  
+  const result = await reviewModel.addReview(inv_id, account_id, review_text);
+  if(result) {
+    req.flash('notice', 'Review added successfully.');
+  } else {
+    req.flash('notice', 'Failed to add review.');
+  }
+  res.redirect(`/inv/detail/${inv_id}`);
 };
 
 
